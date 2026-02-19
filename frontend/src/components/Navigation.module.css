@@ -1,0 +1,73 @@
+/* Navigation.module.css */
+
+.nav {
+  display: flex;
+  font-weight: 500;
+  gap: 20px;
+  background-color: #000000; /* Pure black for max contrast */
+  padding: 1rem 2rem;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+  align-items: center; 
+  position: relative; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  flex: 1; 
+}
+
+.nav a {
+  text-decoration: none;
+  color: #888888; /* Explicit gray for inactive */
+  font-weight: 400;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent; /* Keep layout stable */
+}
+
+.nav a:hover {
+  color: #ffffff;
+}
+
+.nav a:global(.active) {
+  color: var(--color-lime); /* Lime text */
+  font-weight: 600;
+  border-bottom-color: transparent; /* Remove border */
+  text-shadow: 0 0 10px rgba(226, 255, 71, 0.5); /* Glow effect */
+}
+
+/* Theme Toggle Button Styles */
+.themeToggle {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* border-radius removed globally */
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: auto; 
+}
+
+.themeToggle .themeLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted); 
+  transition: all 0.2s ease;
+}
+
+.themeToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-lime);
+}
+
+.themeToggle:hover .themeLabel {
+  color: var(--color-lime);
+}

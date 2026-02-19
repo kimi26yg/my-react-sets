@@ -1,0 +1,42 @@
+/* 전체 컨테이너 */
+div h2 {
+  color: #333;
+  border-bottom: 2px solid #646cff;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* 학생 카드 리스트를 감싸는 영역 */
+.student-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: flex-start;
+}
+
+/* 개별 학생 카드 */
+.student-card {
+  background-color: #f8faff;
+  border-radius: 15px;
+  padding: 20px;
+  min-width: 150px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2f8;
+  text-align: left;
+}
+
+/* 이름과 트로피 */
+.student-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* 점수 텍스트 */
+.student-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: bold;
+}

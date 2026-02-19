@@ -1,0 +1,367 @@
+/* ===== Design System ===== */
+/* Variables are now in index.css */
+
+/* ===== Container ===== */
+.container {
+  max-width: 768px;
+  margin: 64px auto 40px;
+  padding: 0 24px;
+  transition: all 0.3s ease;
+  /* Default dark mode text colors if not inherited */
+  color: var(--color-text);
+}
+
+/* ===== Theme Styles ===== */
+/* When container has 'light' class */
+.container.light {
+  --color-text: var(--color-light-text);
+  --color-text-muted: var(--color-light-text-muted);
+  --color-text-dim: var(--color-light-text-dim);
+  
+  background-color: var(--color-light-bg);
+  border-radius: 8px; /* Optional, makes it look contained */
+}
+
+/* Be specific about light mode overrides */
+.container.light .inputBox input {
+  background: var(--color-light-card);
+  color: var(--color-light-text);
+  border: 1px solid var(--color-light-border);
+}
+
+.container.light .inputBox input::placeholder {
+  color: var(--color-light-text-dim);
+}
+
+.container.light .todoList li {
+  background: var(--color-light-card);
+  border: 1px solid var(--color-light-border);
+}
+
+.container.light .todoList li:hover {
+  background: var(--color-light-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.container.light .actionBtn {
+  border-color: var(--color-light-border);
+  color: var(--color-light-text-muted);
+}
+
+.container.light .actionBtn:hover {
+  background: var(--color-light-bg);
+  color: var(--color-light-text);
+}
+
+.container.light .filterDot .dot {
+  background: var(--color-light-text-dim);
+}
+
+.container.light .filterDot:hover .dot {
+  background: var(--color-light-text-muted);
+}
+
+.container.light .emptyState p {
+  color: var(--color-light-text-dim);
+}
+
+/* ===== Header ===== */
+.header {
+  margin-bottom: 48px;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.remainingCount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.remainingCount .count {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-lime);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.remainingCount .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dim);
+  font-weight: 500;
+}
+
+/* ===== Input Box ===== */
+.inputBox {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.inputBox input {
+  flex: 1;
+  padding: 16px 20px;
+  background: rgba(39, 39, 42, 0.6);
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 2px;
+  font-size: 15px;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  transition: all 0.2s ease;
+}
+
+.inputBox input::placeholder {
+  color: var(--color-text-dim);
+}
+
+.inputBox input:focus {
+  outline: none;
+  background: rgba(39, 39, 42, 0.8);
+  border-bottom-color: var(--color-lime);
+}
+
+.inputBox .addBtn {
+  width: 56px;
+  height: 56px;
+  background: transparent;
+  border: 1px solid var(--color-lime);
+  color: var(--color-lime);
+  /* border-radius removed globally */
+  font-size: 28px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputBox .addBtn:hover {
+  background: rgba(226, 255, 71, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(226, 255, 71, 0.3);
+}
+
+.inputBox .addBtn:active {
+  transform: translateY(0);
+}
+
+/* ===== Controls ===== */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+/* Filter Controls (Minimalist Dots) */
+.filterControls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.filterDot {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterDot .dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-dim);
+  transition: all 0.2s ease;
+}
+
+.filterDot:hover .dot {
+  background: var(--color-text-muted);
+  transform: scale(1.3);
+}
+
+.filterDot.active .dot {
+  background: var(--color-lime);
+  transform: scale(1.5);
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionBtn {
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-zinc);
+  border-radius: 2px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.actionBtn:hover {
+  background: var(--color-zinc);
+  color: var(--color-text);
+  border-color: var(--color-text-dim);
+}
+
+.actionBtn.danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+  border-color: #EF4444;
+}
+
+/* ===== Todo List ===== */
+.todoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todoList li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: rgba(39, 39, 42, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.todoList li:hover {
+  background: rgba(39, 39, 42, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.todoList li input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-lime);
+}
+
+.todoList li span {
+  flex: 1;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.todoList li .deleteBtn {
+  background: none;
+  border: none;
+  color: var(--color-text-dim);
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+}
+
+.todoList li:hover .deleteBtn {
+  opacity: 1;
+}
+
+.todoList li .deleteBtn:hover {
+  color: #EF4444;
+  transform: scale(1.2);
+}
+
+/* Completed State */
+.todoList li.completed {
+  opacity: 0.5;
+}
+
+.todoList li.completed span {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-text-dim);
+}
+
+/* ===== Empty State ===== */
+.emptyState {
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.emptyState p {
+  font-size: 18px;
+  color: var(--color-text-dim);
+  letter-spacing: -0.01em;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .container {
+    margin-top: 32px;
+    padding: 0 16px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .remainingCount .count {
+    font-size: 32px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .filterControls {
+    justify-content: center;
+  }
+
+  .actionButtons {
+    justify-content: stretch;
+  }
+
+  .actionBtn {
+    flex: 1;
+  }
+}

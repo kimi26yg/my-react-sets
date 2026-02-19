@@ -1,0 +1,50 @@
+/* NotFound.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.errorCode {
+  font-size: 8rem;
+  font-weight: 800;
+  color: var(--color-lime);
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(226, 255, 71, 0.2);
+}
+
+.title {
+  font-size: 2rem;
+  margin: 1rem 0;
+  color: var(--color-text);
+}
+
+.description {
+  color: var(--color-text-dim);
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+.homeBtn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: transparent;
+  border: 1px solid var(--color-lime);
+  color: var(--color-lime);
+  text-decoration: none;
+  /* border-radius removed globally */
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.homeBtn:hover {
+  background-color: rgba(226, 255, 71, 0.1); /* Subtle hover fill */
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(226, 255, 71, 0.3);
+}

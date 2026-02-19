@@ -1,0 +1,96 @@
+/* Counter.module.css */
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem;
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  /* border-radius removed globally */
+}
+
+.count {
+  font-size: 6rem;
+  margin: 0;
+  color: var(--color-white, #fff);
+  font-weight: 800;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.positive {
+  color: var(--color-lime);
+}
+
+.negative {
+  color: var(--color-red);
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.button {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none;
+  /* border-radius removed globally */
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-white, #fff);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Specific button colors for better UX */
+.button:nth-child(1) { /* Minus */
+  background-color: rgba(255, 71, 87, 0.2);
+  color: var(--color-red);
+}
+.button:nth-child(1):hover:not(:disabled) {
+  background-color: rgba(255, 71, 87, 0.3);
+}
+
+.button:nth-child(2) { /* Reset */
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.button:nth-child(3) { /* Plus */
+  background-color: rgba(226, 255, 71, 0.2);
+  color: var(--color-lime);
+}
+.button:nth-child(3):hover:not(:disabled) {
+  background-color: rgba(226, 255, 71, 0.3);
+}
+
+
+.button:disabled {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-dim);
+  cursor: not-allowed;
+  opacity: 0.5;
+}

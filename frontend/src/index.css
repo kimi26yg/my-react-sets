@@ -1,0 +1,105 @@
+:root {
+  /* Dark Mode Colors (Default) */
+  --color-bg-dark: #0A0A0B;
+  --color-text-dark: #FFFFFF;
+  --color-lime: #E2FF47;
+  --color-zinc: #27272A;
+  --color-text-muted-dark: #A1A1AA;
+  --color-text-dim-dark: #71717A;
+  
+  /* Additional Colors */
+  --color-red: #FF4757;
+  --color-blue: #3498db;
+  --color-orange: #e67e22;
+
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  /* Light Mode Colors */
+  --color-bg-light: #dcdcdc;
+  --color-text-light: #1A1A1A;
+  --color-light-card: #FFFFFF;
+  --color-text-muted-light: #6B6B6B;
+  --color-text-dim-light: #9CA3AF;
+  --color-light-border: #E5E7EB;
+
+  /* Current Theme Variables - Default to Dark */
+  --color-bg: var(--color-bg-dark);
+  --color-text: var(--color-text-dark);
+  --color-text-muted: var(--color-text-muted-dark);
+  --color-text-dim: var(--color-text-dim-dark);
+}
+
+/* Light Mode Overrides */
+body.light {
+  --color-bg: var(--color-bg-light);
+  --color-text: var(--color-text-light);
+  --color-text-muted: var(--color-text-muted-light);
+  --color-text-dim: var(--color-text-dim-light);
+  
+  /* In light mode, glass effect might need adjustment or different values */
+  --glass-bg: rgba(0, 0, 0, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Global Border Radius Reset */
+  border-radius: 0 !important; 
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Global Container Utility (optional) */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Floating Action Button */
+.fab-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  z-index: 900;
+}
+
+.fab-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.fab-button:active {
+  transform: translateY(0);
+}

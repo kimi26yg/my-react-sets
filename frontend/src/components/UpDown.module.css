@@ -1,0 +1,102 @@
+/* UpDown.module.css */
+
+.updownMain {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 2rem auto;
+  gap: 15px;
+  background: var(--glass-bg);
+  padding: 2rem;
+  /* border-radius removed globally */
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+}
+
+.countDisplay {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  font-weight: bold;
+}
+
+.userInput {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid var(--glass-border);
+  background: rgba(0,0,0,0.2);
+  color: var(--color-text);
+  font-size: 18px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.userInput:focus {
+  border-color: var(--color-lime);
+}
+
+/* 버튼들을 가로로 나란히 */
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn {
+  flex: 1; 
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-black, #000); /* Ensure readability if needed, or use text-dark */
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+/* 제출 버튼: 라임색 아웃라인 */
+.submitBtn {
+  background-color: transparent;
+  border: 1px solid var(--color-lime);
+  color: var(--color-lime);
+}
+
+.submitBtn:hover {
+  background-color: rgba(226, 255, 71, 0.1);
+  box-shadow: 0 0 10px rgba(226, 255, 71, 0.3);
+}
+
+/* 리셋 버튼: 오렌지색 아웃라인 */
+.resetBtn {
+  background-color: transparent;
+  border: 1px solid var(--color-orange);
+  color: var(--color-orange);
+}
+
+.resetBtn:hover {
+  background-color: rgba(230, 126, 34, 0.1);
+  box-shadow: 0 0 10px rgba(230, 126, 34, 0.3);
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+#result {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-red);
+  text-align: center;
+}
+
+#result.correct {
+  color: var(--color-lime);
+  transform: scale(1.1);
+}
