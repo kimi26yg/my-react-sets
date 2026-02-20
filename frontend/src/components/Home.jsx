@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import { useState, useEffect } from "react";
 
-export default function Home() {
+export default function Home({ userInfo }) {
   const [message, setMessage] = useState("");
-  const [name, setName] = useState("");
+  const name = userInfo?.name || "";
   const [quote, setQuote] = useState("");
   const [characteristics, setCharacteristics] = useState("");
 
@@ -48,13 +48,6 @@ export default function Home() {
     getQuote();
   }, []);
 
-  useEffect(() => {
-    const savedInfo = localStorage.getItem("user_info");
-    if (savedInfo) {
-      const parsedInfo = JSON.parse(savedInfo);
-      setName(parsedInfo.name);
-    }
-  }, []);
   const features = [
     {
       to: "/TodoList",

@@ -55,6 +55,17 @@ def characteristics():
     ]
     return { "characteristics": random.choice(characteristics) }
 
+# 랜덤 동물
+@app.get("/api/random-cat")
+def random_cat():
+    url = "https://api.thecatapi.com/v1/images/search?limit=6" 
+    response = httpx.get(url)
+    cats = response.json()
+
+    #받아온 데이터 리턴하기
+    return cats
+
+
 
 @app.get("/api/quote")
 def quote():
@@ -69,10 +80,11 @@ def quote():
         "인생은 짧고, 제 웹페이지의 스크롤은 더 짧습니다. 천천히 즐기세요.",
         "버그가 아니라 '의도하지 않은 창의적 기능'입니다. 놀라지 마세요.",
         "여기까지 읽으셨다니, 당신의 인내심에 경의를 표하며 오늘 행운을 빌어드립니다!"
+        
     ]
     return { "quote": random.choice(quotes) }
 
-# 캐싱된 API 호출 함수 (1시간 TTL)
+# 캐싱된 API 호출 함수 (1시간 TTL) 
 @alru_cache(ttl=3600)
 async def fetch_festivals_from_api(pageNo: int, numOfRows: int, serviceKey: str):
     url = "http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api"

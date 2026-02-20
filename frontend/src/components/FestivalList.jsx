@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./FestivalList.module.css";
 
-function FestivalList() {
+function FestivalList({ userInfo }) {
   // 로컬 개발용: API 키는 백엔드에서 처리
   const url = "/api/festivals?pageNo=1&numOfRows=100";
   const [festvs, setfestvs] = useState([]);
   const [randomFestival, setRandomFestival] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
-  const [name, setName] = useState("");
+  const name = userInfo?.name || "";
 
   useEffect(() => {
-    const savedInfo = localStorage.getItem("user_info");
-    if (savedInfo) {
-      const parsedInfo = JSON.parse(savedInfo);
-      setName(parsedInfo.name);
-    }
-
     async function getData() {
       try {
         const response = await fetch(url);

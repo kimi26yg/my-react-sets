@@ -45,14 +45,17 @@ function App() {
       <Navigation isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <Suspense fallback={<div>로딩 중...</div>}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home userInfo={userInfo} />} />
           <Route
             path="/TodoList"
-            element={<TodoList isDarkMode={isDarkMode} />}
+            element={<TodoList isDarkMode={isDarkMode} userInfo={userInfo} />}
           />
           <Route path="/Counter" element={<Counter />} />
-          <Route path="/UpDown" element={<UpDown />} />
-          <Route path="/FestivalList" element={<FestivalList />} />
+          <Route path="/UpDown" element={<UpDown userInfo={userInfo} />} />
+          <Route
+            path="/FestivalList"
+            element={<FestivalList userInfo={userInfo} />}
+          />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Suspense>

@@ -25,7 +25,7 @@ function TodoItem({ todo, onToggle, onDelete }) {
   );
 }
 
-function TodoList({ isDarkMode }) {
+function TodoList({ isDarkMode, userInfo }) {
   const [todos, setTodos] = useState(() => {
     const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : [];
@@ -36,19 +36,12 @@ function TodoList({ isDarkMode }) {
 
   // 남은 할 일 개수 계산
   const remainingCount = todos.filter((todo) => !todo.isDone).length;
-  const [name, setName] = useState("");
+  const name = userInfo?.name || "";
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  useEffect(() => {
-    const savedInfo = localStorage.getItem("user_info");
-    if (savedInfo) {
-      const parsedInfo = JSON.parse(savedInfo);
-      setName(parsedInfo.name);
-    }
-  }, []);
   // 필터링된 할 일 목록
   const filteredTodos = todos.filter((todo) => {
     if (filter === "active") return !todo.isDone;

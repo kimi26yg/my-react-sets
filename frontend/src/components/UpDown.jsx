@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./UpDown.module.css";
 
-function UpDown() {
+function UpDown({ userInfo }) {
   const [num, setNum] = useState("");
   const [result, setResult] = useState("");
   const [count, setCount] = useState(0);
@@ -35,15 +35,7 @@ function UpDown() {
     console.clear();
   };
 
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    const savedInfo = localStorage.getItem("user_info");
-    if (savedInfo) {
-      const parsedInfo = JSON.parse(savedInfo);
-      setName(parsedInfo.name);
-    }
-  }, []);
+  const name = userInfo?.name || "";
 
   return (
     <div className={styles.updownMain}>
