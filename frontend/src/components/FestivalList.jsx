@@ -24,10 +24,17 @@ function FestivalList({ userInfo }) {
   useEffect(() => {
     let messageInterval;
     if (isLoading) {
-      let index = 0;
       messageInterval = setInterval(() => {
-        index = (index + 1) % WITTY_MESSAGES.length;
-        setLoadingMessage(WITTY_MESSAGES[index]);
+        setLoadingMessage((prevText) => {
+          let nextText;
+          do {
+            const randomIndex = Math.floor(
+              Math.random() * WITTY_MESSAGES.length,
+            );
+            nextText = WITTY_MESSAGES[randomIndex];
+          } while (nextText === prevText && WITTY_MESSAGES.length > 1);
+          return nextText;
+        });
       }, 2500);
     }
     return () => clearInterval(messageInterval);
