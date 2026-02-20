@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import random
 import httpx
 import os
+import copy
 from dotenv import load_dotenv
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -88,15 +89,36 @@ def quote():
 @alru_cache(ttl=3600)
 async def fetch_festivals_from_api(pageNo: int, numOfRows: int, serviceKey: str):
     url = "http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api"
-    # httpx 타임아웃 설정 (10초)
-    async with httpx.AsyncClient(timeout=10.0) as client:
+    # httpx 타임아웃 설정 (30초) - 1000개 요청시 오래 걸릴 수 있으므로 넉넉하게 잡음
+    async with httpx.AsyncClient(timeout=30.0) as client:
         # 안전한 쿼리 스트링 구성
         request_url = f"{url}?serviceKey={serviceKey}&pageNo={pageNo}&numOfRows={numOfRows}&type=json"
         
+        print(f"Fetching from External API: pageNo={pageNo}, numOfRows={numOfRows}")
         try:
             response = await client.get(request_url)
             response.raise_for_status() # 4xx, 5xx 에러 시 예외 발생
-            return response.json()
+            
+            # API 응답 결과 가져오기
+            result = response.json()
+            
+            # 2026년 1월 1일 이후 데이터만 필터링하여 저장 (캐싱 최적화)
+            if result and isinstance(result, dict):
+                response_data = result.get("response", {})
+                if isinstance(response_data, dict):
+                    body_data = response_data.get("body", {})
+                    if isinstance(body_data, dict):
+                        items = body_data.get("items", [])
+                        if items:
+                            filtered_items = [
+                                item for item in items 
+                                if item.get("fstvlStartDate") and item.get("fstvlStartDate") >= "2026-01-01"
+                            ]
+                            body_data["items"] = filtered_items
+                            body_data["totalCount"] = len(filtered_items)
+                            body_data["numOfRows"] = len(filtered_items)
+                            
+            return result
         except httpx.HTTPStatusError as e:
             print(f"External API Error: {e.response.status_code} - {e.response.text}")
             raise HTTPException(status_code=503, detail="External API call failed")
@@ -112,8 +134,9 @@ async def fetch_festivals_from_api(pageNo: int, numOfRows: int, serviceKey: str)
 async def get_festivals(
     request: Request,
     pageNo: int = Query(1, ge=1, description="페이지 번호 (1 이상)"),
-    numOfRows: int = Query(100, ge=1, le=100, description="한 페이지 결과 수 (1~100)")
+    numOfRows: int = Query(1000, ge=1, le=2000, description="한 페이지 결과 수 (1~2000)")
 ):
-    # 캐싱된 함수 호출
+    # 캐싱된 함수 호출 (이미 필터링된 가벼운 데이터가 반환됨)
     result = await fetch_festivals_from_api(pageNo, numOfRows, API_KEY)
+    
     return result   
