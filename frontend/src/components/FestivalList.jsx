@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./FestivalList.module.css";
+import FestivalMap from "./FestivalMap";
 
 const WITTY_MESSAGES = [
   "전국을 돌면서 축제가 있는지 유랑하는 중...",
@@ -19,6 +20,7 @@ function FestivalList({ userInfo }) {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState(WITTY_MESSAGES[0]);
+  const [viewMode, setViewMode] = useState("list"); // 'list' or 'map'
   const name = userInfo?.name || "";
 
   useEffect(() => {
@@ -145,6 +147,22 @@ function FestivalList({ userInfo }) {
     <div className={styles.container}>
       <div className={styles.headerRow}>
         <h2 className={styles.festivalHeader}>국내 축제 리스트</h2>
+        {!isLoading && (
+          <div className={styles.viewToggle}>
+            <button
+              className={`${styles.toggleBtn} ${viewMode === "list" ? styles.activeToggle : ""}`}
+              onClick={() => setViewMode("list")}
+            >
+              리스트 보기
+            </button>
+            <button
+              className={`${styles.toggleBtn} ${viewMode === "map" ? styles.activeToggle : ""}`}
+              onClick={() => setViewMode("map")}
+            >
+              지도 보기
+            </button>
+          </div>
+        )}
       </div>
 
       {isLoading ? (
@@ -197,9 +215,34 @@ function FestivalList({ userInfo }) {
             ))}
           </div>
 
-          <div className={styles.festivalList}>
-            {filteredFestivals.length > 0 ? (
-              filteredFestivals.map((festv, index) => {
+          {filteredFestivals.length === 0 ? (
+            <div className={styles.festivalList}>
+              <h2 className={styles.emptyState}>
+                {selectedMonth
+                  ? `${selectedMonth}월은 정보가 없네요 ${name}님..🧐 찾는대로 바로 업데이트 할게요.`
+                  : "축제 정보가 없습니다."}
+              </h2>
+            </div>
+          ) : viewMode === "map" ? (
+            <div className={styles.mapWrap} style={{ position: "relative" }}>
+              {randomFestival && (
+                <button
+                  className={styles.clearMapBtn}
+                  onClick={() => setRandomFestival(null)}
+                >
+                  ↩ 전체 지도 보기
+                </button>
+              )}
+              <FestivalMap
+                festivals={
+                  randomFestival ? [randomFestival] : filteredFestivals
+                }
+                handleCardClick={handleCardClick}
+              />
+            </div>
+          ) : (
+            <div className={styles.festivalList}>
+              {filteredFestivals.map((festv, index) => {
                 const isPast = isPastFestival(festv.fstvlStartDate);
                 return (
                   <div
@@ -223,15 +266,9 @@ function FestivalList({ userInfo }) {
                     </div>
                   </div>
                 );
-              })
-            ) : (
-              <h2 className={styles.emptyState}>
-                {selectedMonth
-                  ? `${selectedMonth}월은 정보가 없네요 ${name}님..🧐 찾는대로 바로 업데이트 할게요.`
-                  : "축제 정보가 없습니다."}
-              </h2>
-            )}
-          </div>
+              })}
+            </div>
+          )}
         </>
       )}
     </div>
